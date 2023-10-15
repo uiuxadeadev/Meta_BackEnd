@@ -134,7 +134,7 @@ class GroupViewSet(viewsets.ViewSet):
     permission_classes = [IsAdminUser]
     def list(self, request):
         users = User.objects.all().filter(groups__name='Manager')
-        items = UserSerilializer(users, many=True)
+        items = UserSerializer(users, many=True)
         return Response(items.data)
 
     def create(self, request):
@@ -153,7 +153,7 @@ class DeliveryCrewViewSet(viewsets.ViewSet):
     permission_classes = [IsAuthenticated]
     def list(self, request):
         users = User.objects.all().filter(groups__name='Delivery Crew')
-        items = UserSerilializer(users, many=True)
+        items = UserSerializer(users, many=True)
         return Response(items.data)
 
     def create(self, request):
