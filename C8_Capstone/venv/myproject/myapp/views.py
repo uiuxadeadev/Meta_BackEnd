@@ -2,10 +2,10 @@ from django.shortcuts import render, get_object_or_404
 from rest_framework import generics, viewsets
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.contrib.auth.models import User, Group
-from .models import Booking, Menu
+from .models import Booking, MenuItem
 from .serializers import (
     BookingSerializer,
-    MenuSerializer,
+    MenuItemSerializer,
     UserSerializer
 )
 from rest_framework.response import Response
@@ -17,22 +17,24 @@ def index(request):
 
 
 class UserViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = User.objects.all()
     serializer_class = UserSerializer
     # permission_classes = [permissions.IsAuthenticated]
-    permission_classes = [IsAuthenticated]
+
 
 # Menu API
 
 
 class MenuItemsView(generics.ListCreateAPIView):
-    queryset = Menu.objects.all()
-    serializer_class = MenuSerializer
+    # permission_classes = [IsAuthenticated]
+    queryset = MenuItem.objects.all()
+    serializer_class = MenuItemSerializer
 
 
 class SingleMenuItemView(generics.RetrieveUpdateAPIView, generics.DestroyAPIView):
-    queryset = Menu.objects.all()
-    serializer_class = MenuSerializer
+    queryset = MenuItem.objects.all()
+    serializer_class = MenuItemSerializer
 
 # table booking API
 

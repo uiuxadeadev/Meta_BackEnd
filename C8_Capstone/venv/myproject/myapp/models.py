@@ -14,10 +14,10 @@ class Booking(models.Model):
 
 
 # Add code to create Menu model
-class Menu(models.Model):
+class MenuItem(models.Model):
     title = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=4, decimal_places=2)
     # menu_item_description = models.TextField(max_length=1000, default='')
 
     def __str__(self):
-        return self.title
+        return f'{self.title} : {str(self.price)}'
